@@ -20,6 +20,7 @@
 		2830E44C288C0303008F5C25 /* SCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2830E44B288C0303008F5C25 /* SCView.swift */; };
 		2830E44F288C0385008F5C25 /* ExtendedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2830E44E288C0385008F5C25 /* ExtendedView.swift */; };
 		2830E452288C0612008F5C25 /* ExtendedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2830E451288C0612008F5C25 /* ExtendedString.swift */; };
+		2830E454288C3A9C008F5C25 /* ExtendedColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2830E453288C3A9C008F5C25 /* ExtendedColors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		2830E44B288C0303008F5C25 /* SCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCView.swift; sourceTree = "<group>"; };
 		2830E44E288C0385008F5C25 /* ExtendedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedView.swift; sourceTree = "<group>"; };
 		2830E451288C0612008F5C25 /* ExtendedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedString.swift; sourceTree = "<group>"; };
+		2830E453288C3A9C008F5C25 /* ExtendedColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedColors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				2830E451288C0612008F5C25 /* ExtendedString.swift */,
+				2830E453288C3A9C008F5C25 /* ExtendedColors.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 			files = (
 				2830E41A288BEB07008F5C25 /* LoginVC.swift in Sources */,
 				2830E416288BEB07008F5C25 /* AppDelegate.swift in Sources */,
+				2830E454288C3A9C008F5C25 /* ExtendedColors.swift in Sources */,
 				2830E418288BEB07008F5C25 /* SceneDelegate.swift in Sources */,
 				2830E44F288C0385008F5C25 /* ExtendedView.swift in Sources */,
 				2830E452288C0612008F5C25 /* ExtendedString.swift in Sources */,

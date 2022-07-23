@@ -30,12 +30,16 @@ class LoginVC: UIViewController {
     @IBOutlet weak var btnLogin: SCButton!
     
     
-    var email = ""
+    var username = ""
     var password = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        
+//        for countryName in NSLocale.getCountryNames() {
+//            print("\(countryName)")
+//        }
     }
     
     func setupView(){
@@ -118,7 +122,7 @@ extension LoginVC: UITextFieldDelegate{
         if textField == txtUsername {
             usernameOuterView.showRedBorder(false)
             usernameErrorStackView.isHidden = true
-            self.email = currentText
+            self.username = currentText
         }else if textField == txtPassword {
             passwordOuterView.showRedBorder(false)
             passwordErrorStackView.isHidden = true
@@ -139,18 +143,38 @@ extension LoginVC: UITextFieldDelegate{
             passwordOuterView.showRedBorder(true)
             passwordErrorStackView.isHidden = false
             lblPasswordError.text           = "Please enter password"
+        }else if textField == txtPassword, textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) != ""{
+            if !textField.text!.isValidPassword(){
+                passwordOuterView.showRedBorder(true)
+                passwordErrorStackView.isHidden = false
+                lblPasswordError.text           = "Please enter a valid password"
+            }
         }
     }
     
     func checkAvailability(){
-//        if (self.email != "") && self.email.isValidEmailId() && (self.password != ""){
-//            btnLogin.isEnabled = true
-//            btnLogin.backgroundColor = UIColor.appGreenColor()
-//        }else{
-//            btnLogin.isEnabled = false
-//            btnLogin.backgroundColor = UIColor.appGreenColorDisabled()
-//        }
+        if (self.username != "") && (self.password != "") && self.password.isValidPassword(){
+            btnLogin.isEnabled = true
+            btnLogin.backgroundColor = UIColor.appGreenColor()
+        }else{
+            btnLogin.isEnabled = false
+            btnLogin.backgroundColor = UIColor.appGreenColorDisabled()
+        }
     }
 }
 
+
+
+extension NSLocale {
+    //get an array of country names from NSlocale
+    class func getCountryNames() -> [String] {
+        var countryNames = [String]()
+        for localeCode in NSLocale.isoCountryCodes {
+            let countryName = (NSLocale.current as NSLocale).displayName(forKey: .countryCode, value: localeCode) ?? ""
+            countryNames.append(countryName)
+        }
+        return countryNames
+    }
+
+}
 
