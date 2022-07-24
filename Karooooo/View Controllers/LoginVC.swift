@@ -7,39 +7,41 @@
 
 import UIKit
 
-class LoginVC: UIViewController {
+final class LoginVC: UIViewController {
 
     // MARK: - Outlets and variables
     //text fields
-    @IBOutlet weak var txtUsername: UITextField!
-    @IBOutlet weak var txtPassword: UITextField!
+    @IBOutlet private weak var txtUsername: UITextField!
+    @IBOutlet private weak var txtPassword: UITextField!
+    @IBOutlet weak var txtCountry: UITextField!
     
     //textField outerViews
-    @IBOutlet weak var usernameOuterView: SCView!
-    @IBOutlet weak var passwordOuterView: SCView!
+    @IBOutlet private weak var usernameOuterView: SCView!
+    @IBOutlet private weak var passwordOuterView: SCView!
+    @IBOutlet weak var countryOuterView: SCView!
     
     //error stack views
-    @IBOutlet weak var usernameErrorStackView: UIStackView!
-    @IBOutlet weak var passwordErrorStackView: UIStackView!
+    @IBOutlet private weak var usernameErrorStackView: UIStackView!
+    @IBOutlet private weak var passwordErrorStackView: UIStackView!
+    @IBOutlet weak var countryErrorStackView: UIStackView!
     
     //labels to show validation errors
-    @IBOutlet weak var lblUsernameError: UILabel!
-    @IBOutlet weak var lblPasswordError: UILabel!
+    @IBOutlet private weak var lblUsernameError: UILabel!
+    @IBOutlet private weak var lblPasswordError: UILabel!
+    @IBOutlet weak var lblCountryError: UILabel!
     
     //Login Button
-    @IBOutlet weak var btnLogin: SCButton!
+    @IBOutlet private weak var btnLogin: SCButton!
     
-    
-    var username = ""
-    var password = ""
+    private var username = ""
+    private var password = ""
+    private var country  = ""
+    var countryNameArray : [String]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         
-//        for countryName in NSLocale.getCountryNames() {
-//            print("\(countryName)")
-//        }
     }
     
     func setupView(){
@@ -51,6 +53,9 @@ class LoginVC: UIViewController {
         btnLogin.isEnabled              = false
         usernameErrorStackView.isHidden = true
         passwordErrorStackView.isHidden = true
+        countryErrorStackView.isHidden  = true
+        
+        self.countryNameArray = NSLocale.getCountryNames()
     }
    
     @IBAction func showHidePassword(_ sender: UIButton) {
@@ -59,14 +64,20 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func loginBtnTapped(_ sender: UIButton) {
-        //User register api.
-//        sender.loadingIndicator(true, sender.titleLabel?.text ?? "")
-//        guard let params = GetParamModel.shared.getLoginParam(self.email, self.password) else{return}
-//        self.loginApi(params)
+        //check if user has selected any country.
+        self.view.endEditing(true)
+        if self.country == ""{
+            countryErrorStackView.isHidden  = false
+            lblCountryError.text = "Please select your country"
+            countryOuterView.showRedBorder(true)
+        }else{
+            //Proceed with saving the data in database.
+            saveData()
+        }
     }
     
-    // Login api
-    func loginApi(_ parameters:[String:Any]){
+    // Save data in database
+    func saveData(){
 //        let apiurl = ConstantModel.shared.api.login
 //        ApiCallModel.shared.apiCall(isSilent: true, url:apiurl, parameters: parameters, type: ConstantModel.shared.api.PostAPI, delegate: self, success: { response in
 //            self.btnLogin.loadingIndicator(false, self.btnLogin.titleLabel?.text ?? "")
@@ -101,12 +112,32 @@ class LoginVC: UIViewController {
 //            guard let successFailurePopup = storyboard.instantiateViewController(withIdentifier: "SuccessFailurePopup") as? SuccessFailurePopup else{return}
 //            successFailurePopup.isSuccess = false
 //            successFailurePopup.successFailureText = "Felaktig e-postadress eller lösenord"
-//            self.present(successFailurePopup, animated: true, completion: nil)
+//            self.present(successFail urePopup, animated: true, completion: nil)
 //        })
     }
 }
 
-extension LoginVC: UITextFieldDelegate{
+extension LoginVC: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == txtCountry{
+            guard let countryListVC = storyboard?.instantiateViewController(withIdentifier: "CountryListVC") as? CountryListVC else{return false}
+//            countryListVC.modalPresentationStyle = .fullScreen
+            countryListVC.countryList            = self.countryNameArray ?? []
+//            searchLocationVC.locationCallback = { returnedPlacemark in
+//                self.searchedCoordinates = returnedPlacemark.coordinate
+//
+//                searchBar.text = returnedPlacemark.name
+//
+//                //hit the search api and refresh the map with new cluster items.
+//                self.getClusterItems(isSilent: false)
+//            }
+            
+            self.present(countryListVC, animated: true, completion: nil)
+        }
+        
+        return false
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //This is mainly for shifting the responder
         if textField == txtUsername{
@@ -144,7 +175,7 @@ extension LoginVC: UITextFieldDelegate{
             passwordErrorStackView.isHidden = false
             lblPasswordError.text           = "Please enter password"
         }else if textField == txtPassword, textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) != ""{
-            if !textField.text!.isValidPassword(){
+            if !textField.text!.isValidPassword{
                 passwordOuterView.showRedBorder(true)
                 passwordErrorStackView.isHidden = false
                 lblPasswordError.text           = "Please enter a valid password"
@@ -153,28 +184,13 @@ extension LoginVC: UITextFieldDelegate{
     }
     
     func checkAvailability(){
-        if (self.username != "") && (self.password != "") && self.password.isValidPassword(){
+        if (self.username != "") && (self.password != "") && self.password.isValidPassword{
             btnLogin.isEnabled = true
-            btnLogin.backgroundColor = UIColor.appGreenColor()
+            btnLogin.backgroundColor = .appGreenColor
         }else{
             btnLogin.isEnabled = false
-            btnLogin.backgroundColor = UIColor.appGreenColorDisabled()
+            btnLogin.backgroundColor = .appGreenColorDisabled
         }
     }
-}
-
-
-
-extension NSLocale {
-    //get an array of country names from NSlocale
-    class func getCountryNames() -> [String] {
-        var countryNames = [String]()
-        for localeCode in NSLocale.isoCountryCodes {
-            let countryName = (NSLocale.current as NSLocale).displayName(forKey: .countryCode, value: localeCode) ?? ""
-            countryNames.append(countryName)
-        }
-        return countryNames
-    }
-
 }
 
