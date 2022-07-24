@@ -12,6 +12,8 @@ class CountryListVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var countryList = [String]()
+    var countryNameCallback : ((_ name : String) -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,6 +32,10 @@ extension CountryListVC : UITableViewDelegate, UITableViewDataSource{
         return countryCell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.countryNameCallback?(countryList[indexPath.row])
+        self.dismiss(animated: true)
+    }
 }
 
 class CountryTableViewCell : UITableViewCell{

@@ -37,6 +37,7 @@ final class LoginVC: UIViewController {
     private var password = ""
     private var country  = ""
     var countryNameArray : [String]?
+    var db:DBHelper = DBHelper()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,42 +79,7 @@ final class LoginVC: UIViewController {
     
     // Save data in database
     func saveData(){
-//        let apiurl = ConstantModel.shared.api.login
-//        ApiCallModel.shared.apiCall(isSilent: true, url:apiurl, parameters: parameters, type: ConstantModel.shared.api.PostAPI, delegate: self, success: { response in
-//            self.btnLogin.loadingIndicator(false, self.btnLogin.titleLabel?.text ?? "")
-//            //parse the data and save the profile model.
-//            APIResponseModel.shared.parseLoginResponse(response: response, sender: self) { result in
-//                let name = UserDefaultsHandler.userInfo!.firstName + " " + UserDefaultsHandler.userInfo!.lastName
-//
-//                FirebaseOperationModel.shared.registerUser(UserDefaultsHandler.userInfo!.id, values: ["name": name,
-//                "email": UserDefaultsHandler.userInfo?.email ?? "",
-//                "token": UserDefaultsHandler.deviceToken ?? "",
-//                "isOnline": true] as [String: Any])
-//
-//                //check if the email is confirmed or not.
-//                if let confirmStatus = UserDefaultsHandler.emailConfirmed{
-//                    if confirmStatus{
-//                        //move to dashboard
-//                        UserDefaultsHandler.pageToShow = ConstantModel.shared.page.TabScreen
-//                        NavigationManager.shared.checkWhereToNav(3, nil)
-//                    }else{
-//                        //redirect to email verification information screen.
-//                        guard let emailVerificationInfoVC = self.storyboard?.instantiateViewController(withIdentifier: "EmailVerificationInfoVC") as? EmailVerificationInfoVC else{return}
-//                        emailVerificationInfoVC.email      = self.email
-//                        emailVerificationInfoVC.isComeFrom = "Login"
-//                        UserDefaultsHandler.isVerificationCompleted = false
-//                        self.navigationController?.pushViewController(emailVerificationInfoVC, animated: true)
-//                    }
-//                }
-//            }
-//        }, failure: { error in
-//            self.btnLogin.loadingIndicator(false, self.btnLogin.titleLabel?.text ?? "")
-//            let storyboard = UIStoryboard(name: "PublishParkingSlot", bundle: nil)
-//            guard let successFailurePopup = storyboard.instantiateViewController(withIdentifier: "SuccessFailurePopup") as? SuccessFailurePopup else{return}
-//            successFailurePopup.isSuccess = false
-//            successFailurePopup.successFailureText = "Felaktig e-postadress eller lösenord"
-//            self.present(successFail urePopup, animated: true, completion: nil)
-//        })
+        db.insert(id: 0, username: self.username, password: self.password, country: self.country)
     }
 }
 
@@ -121,21 +87,21 @@ extension LoginVC: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == txtCountry{
             guard let countryListVC = storyboard?.instantiateViewController(withIdentifier: "CountryListVC") as? CountryListVC else{return false}
-//            countryListVC.modalPresentationStyle = .fullScreen
             countryListVC.countryList            = self.countryNameArray ?? []
-//            searchLocationVC.locationCallback = { returnedPlacemark in
-//                self.searchedCoordinates = returnedPlacemark.coordinate
-//
-//                searchBar.text = returnedPlacemark.name
-//
-//                //hit the search api and refresh the map with new cluster items.
-//                self.getClusterItems(isSilent: false)
-//            }
+            countryListVC.countryNameCallback = { country in
+                self.country = country
+                self.txtCountry.text = country
+                
+                self.countryErrorStackView.isHidden  = true
+                self.countryOuterView.showRedBorder(false)
+            }
             
             self.present(countryListVC, animated: true, completion: nil)
+            
+            return false
+        }else{
+            return true
         }
-        
-        return false
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

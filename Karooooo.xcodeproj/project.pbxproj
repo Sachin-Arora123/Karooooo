@@ -23,6 +23,8 @@
 		2830E454288C3A9C008F5C25 /* ExtendedColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2830E453288C3A9C008F5C25 /* ExtendedColors.swift */; };
 		28AA3F25288D35B50009DED2 /* ExtendedLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AA3F24288D35B50009DED2 /* ExtendedLocale.swift */; };
 		28AA3F27288D405D0009DED2 /* CountryListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AA3F26288D405D0009DED2 /* CountryListVC.swift */; };
+		28AA3F2A288D48170009DED2 /* DBhelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AA3F29288D48170009DED2 /* DBhelper.swift */; };
+		28AA3F2C288D4FB60009DED2 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AA3F2B288D4FB60009DED2 /* Person.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		2830E453288C3A9C008F5C25 /* ExtendedColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedColors.swift; sourceTree = "<group>"; };
 		28AA3F24288D35B50009DED2 /* ExtendedLocale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedLocale.swift; sourceTree = "<group>"; };
 		28AA3F26288D405D0009DED2 /* CountryListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListVC.swift; sourceTree = "<group>"; };
+		28AA3F29288D48170009DED2 /* DBhelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBhelper.swift; sourceTree = "<group>"; };
+		28AA3F2B288D4FB60009DED2 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,7 @@
 		2830E414288BEB07008F5C25 /* Karooooo */ = {
 			isa = PBXGroup;
 			children = (
+				28AA3F28288D48070009DED2 /* Helpers */,
 				2830E450288C0600008F5C25 /* Extensions */,
 				2830E446288C00B3008F5C25 /* Models */,
 				2830E447288C00B8008F5C25 /* Views */,
@@ -156,6 +161,7 @@
 		2830E446288C00B3008F5C25 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				28AA3F2B288D4FB60009DED2 /* Person.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -186,6 +192,14 @@
 				28AA3F24288D35B50009DED2 /* ExtendedLocale.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		28AA3F28288D48070009DED2 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				28AA3F29288D48170009DED2 /* DBhelper.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,9 +339,11 @@
 				2830E418288BEB07008F5C25 /* SceneDelegate.swift in Sources */,
 				2830E44F288C0385008F5C25 /* ExtendedView.swift in Sources */,
 				2830E452288C0612008F5C25 /* ExtendedString.swift in Sources */,
+				28AA3F2C288D4FB60009DED2 /* Person.swift in Sources */,
 				28AA3F25288D35B50009DED2 /* ExtendedLocale.swift in Sources */,
 				2830E44A288C02DD008F5C25 /* SCButton.swift in Sources */,
 				2830E44C288C0303008F5C25 /* SCView.swift in Sources */,
+				28AA3F2A288D48170009DED2 /* DBhelper.swift in Sources */,
 				28AA3F27288D405D0009DED2 /* CountryListVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
