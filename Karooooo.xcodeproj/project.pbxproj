@@ -25,6 +25,7 @@
 		28AA3F27288D405D0009DED2 /* CountryListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AA3F26288D405D0009DED2 /* CountryListVC.swift */; };
 		28AA3F2A288D48170009DED2 /* DBhelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AA3F29288D48170009DED2 /* DBhelper.swift */; };
 		28AA3F2C288D4FB60009DED2 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AA3F2B288D4FB60009DED2 /* Person.swift */; };
+		28BCD710288ED95700CD8036 /* UsersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BCD70F288ED95700CD8036 /* UsersListVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		28AA3F26288D405D0009DED2 /* CountryListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListVC.swift; sourceTree = "<group>"; };
 		28AA3F29288D48170009DED2 /* DBhelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBhelper.swift; sourceTree = "<group>"; };
 		28AA3F2B288D4FB60009DED2 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		28BCD70F288ED95700CD8036 /* UsersListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 			children = (
 				2830E419288BEB07008F5C25 /* LoginVC.swift */,
 				28AA3F26288D405D0009DED2 /* CountryListVC.swift */,
+				28BCD70F288ED95700CD8036 /* UsersListVC.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				2830E40E288BEB07008F5C25 /* Sources */,
 				2830E40F288BEB07008F5C25 /* Frameworks */,
 				2830E410288BEB07008F5C25 /* Resources */,
+				28375A2A288FDA4B0045471D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -328,6 +332,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		28375A2A288FDA4B0045471D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2830E40E288BEB07008F5C25 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -343,6 +367,7 @@
 				28AA3F25288D35B50009DED2 /* ExtendedLocale.swift in Sources */,
 				2830E44A288C02DD008F5C25 /* SCButton.swift in Sources */,
 				2830E44C288C0303008F5C25 /* SCView.swift in Sources */,
+				28BCD710288ED95700CD8036 /* UsersListVC.swift in Sources */,
 				28AA3F2A288D48170009DED2 /* DBhelper.swift in Sources */,
 				28AA3F27288D405D0009DED2 /* CountryListVC.swift in Sources */,
 			);
