@@ -21,6 +21,13 @@
 		2830E44F288C0385008F5C25 /* ExtendedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2830E44E288C0385008F5C25 /* ExtendedView.swift */; };
 		2830E452288C0612008F5C25 /* ExtendedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2830E451288C0612008F5C25 /* ExtendedString.swift */; };
 		2830E454288C3A9C008F5C25 /* ExtendedColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2830E453288C3A9C008F5C25 /* ExtendedColors.swift */; };
+		28375A33288FF5580045471D /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28375A32288FF5580045471D /* Constant.swift */; };
+		28375A35288FF8080045471D /* ExtendedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28375A34288FF8080045471D /* ExtendedViewController.swift */; };
+		28375A37289001F70045471D /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28375A36289001F70045471D /* EventManager.swift */; };
+		284E550A28903DD100308CBF /* Geo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284E550628903DD000308CBF /* Geo.swift */; };
+		284E550B28903DD100308CBF /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284E550728903DD000308CBF /* Address.swift */; };
+		284E550C28903DD100308CBF /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284E550828903DD000308CBF /* Company.swift */; };
+		284E550D28903DD100308CBF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284E550928903DD100308CBF /* User.swift */; };
 		28AA3F25288D35B50009DED2 /* ExtendedLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AA3F24288D35B50009DED2 /* ExtendedLocale.swift */; };
 		28AA3F27288D405D0009DED2 /* CountryListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AA3F26288D405D0009DED2 /* CountryListVC.swift */; };
 		28AA3F2A288D48170009DED2 /* DBhelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AA3F29288D48170009DED2 /* DBhelper.swift */; };
@@ -64,6 +71,13 @@
 		2830E44E288C0385008F5C25 /* ExtendedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedView.swift; sourceTree = "<group>"; };
 		2830E451288C0612008F5C25 /* ExtendedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedString.swift; sourceTree = "<group>"; };
 		2830E453288C3A9C008F5C25 /* ExtendedColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedColors.swift; sourceTree = "<group>"; };
+		28375A32288FF5580045471D /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		28375A34288FF8080045471D /* ExtendedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedViewController.swift; sourceTree = "<group>"; };
+		28375A36289001F70045471D /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
+		284E550628903DD000308CBF /* Geo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geo.swift; sourceTree = "<group>"; };
+		284E550728903DD000308CBF /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		284E550828903DD000308CBF /* Company.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
+		284E550928903DD100308CBF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		28AA3F24288D35B50009DED2 /* ExtendedLocale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedLocale.swift; sourceTree = "<group>"; };
 		28AA3F26288D405D0009DED2 /* CountryListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListVC.swift; sourceTree = "<group>"; };
 		28AA3F29288D48170009DED2 /* DBhelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBhelper.swift; sourceTree = "<group>"; };
@@ -164,7 +178,8 @@
 		2830E446288C00B3008F5C25 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				28AA3F2B288D4FB60009DED2 /* Person.swift */,
+				284E55102890546700308CBF /* Logged-in User */,
+				284E55112890547900308CBF /* Api User */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -193,14 +208,36 @@
 				2830E453288C3A9C008F5C25 /* ExtendedColors.swift */,
 				2830E44E288C0385008F5C25 /* ExtendedView.swift */,
 				28AA3F24288D35B50009DED2 /* ExtendedLocale.swift */,
+				28375A34288FF8080045471D /* ExtendedViewController.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		284E55102890546700308CBF /* Logged-in User */ = {
+			isa = PBXGroup;
+			children = (
+				28AA3F2B288D4FB60009DED2 /* Person.swift */,
+			);
+			path = "Logged-in User";
+			sourceTree = "<group>";
+		};
+		284E55112890547900308CBF /* Api User */ = {
+			isa = PBXGroup;
+			children = (
+				284E550728903DD000308CBF /* Address.swift */,
+				284E550828903DD000308CBF /* Company.swift */,
+				284E550628903DD000308CBF /* Geo.swift */,
+				284E550928903DD100308CBF /* User.swift */,
+			);
+			path = "Api User";
 			sourceTree = "<group>";
 		};
 		28AA3F28288D48070009DED2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				28AA3F29288D48170009DED2 /* DBhelper.swift */,
+				28375A32288FF5580045471D /* Constant.swift */,
+				28375A36289001F70045471D /* EventManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -357,19 +394,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28375A37289001F70045471D /* EventManager.swift in Sources */,
 				2830E41A288BEB07008F5C25 /* LoginVC.swift in Sources */,
 				2830E416288BEB07008F5C25 /* AppDelegate.swift in Sources */,
 				2830E454288C3A9C008F5C25 /* ExtendedColors.swift in Sources */,
 				2830E418288BEB07008F5C25 /* SceneDelegate.swift in Sources */,
+				284E550A28903DD100308CBF /* Geo.swift in Sources */,
 				2830E44F288C0385008F5C25 /* ExtendedView.swift in Sources */,
+				28375A35288FF8080045471D /* ExtendedViewController.swift in Sources */,
 				2830E452288C0612008F5C25 /* ExtendedString.swift in Sources */,
 				28AA3F2C288D4FB60009DED2 /* Person.swift in Sources */,
+				284E550C28903DD100308CBF /* Company.swift in Sources */,
 				28AA3F25288D35B50009DED2 /* ExtendedLocale.swift in Sources */,
 				2830E44A288C02DD008F5C25 /* SCButton.swift in Sources */,
+				284E550D28903DD100308CBF /* User.swift in Sources */,
+				284E550B28903DD100308CBF /* Address.swift in Sources */,
 				2830E44C288C0303008F5C25 /* SCView.swift in Sources */,
 				28BCD710288ED95700CD8036 /* UsersListVC.swift in Sources */,
 				28AA3F2A288D48170009DED2 /* DBhelper.swift in Sources */,
 				28AA3F27288D405D0009DED2 /* CountryListVC.swift in Sources */,
+				28375A33288FF5580045471D /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,8 +588,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Karooooo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -560,6 +606,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = sachin.Karooooo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -571,8 +618,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Karooooo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -587,6 +636,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = sachin.Karooooo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

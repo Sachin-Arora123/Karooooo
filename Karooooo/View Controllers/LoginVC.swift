@@ -46,11 +46,10 @@ final class LoginVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         
         // initial state
-//        btnLogin.isEnabled              = false
+        btnLogin.isEnabled              = false
         usernameErrorStackView.isHidden = true
         passwordErrorStackView.isHidden = true
         countryErrorStackView.isHidden  = true
-        
         self.countryNameArray = NSLocale.getCountryNames()
     }
    
@@ -60,106 +59,91 @@ final class LoginVC: UIViewController {
     }
     
     @IBAction func loginBtnTapped(_ sender: UIButton) {
-        
-        guard let userlistVC = storyboard?.instantiateViewController(withIdentifier: "UsersListVC") as? UsersListVC else{return}
-        navigationController?.pushViewController(userlistVC, animated: true)
-        
-        
-        //check if user has selected any country.
-//        self.view.endEditing(true)
-//        if self.country == ""{
-//            countryErrorStackView.isHidden  = false
-//            lblCountryError.text = "Please select your country"
-//            countryOuterView.showRedBorder(true)
-//        }else{
-//            //Proceed with saving the data in database.
-//            saveData()
-//        }
+        // Check if user has selected any country.
+        self.view.endEditing(true)
+        if self.country == ""{
+            countryErrorStackView.isHidden  = false
+            lblCountryError.text = "Please select your country"
+            countryOuterView.showRedBorder(true)
+        }else{
+            //Proceed with saving the data in database.
+            saveData()
+        }
     }
-    
     // Save data in database
-    func saveData(){
+    func saveData() {
         database.insert(id: 0, username: self.username, password: self.password, country: self.country)
         
-        //redirect to new screen.
-        
+        // Redirect to new screen.
+        guard let userlistVC = storyboard?.instantiateViewController(withIdentifier: "UsersListVC") as? UsersListVC else{return}
+        navigationController?.pushViewController(userlistVC, animated: true)
     }
 }
 
 extension LoginVC: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == txtCountry{
+        if textField == txtCountry {
             guard let countryListVC = storyboard?.instantiateViewController(withIdentifier: "CountryListVC") as? CountryListVC else{return false}
             countryListVC.countryList            = self.countryNameArray ?? []
             countryListVC.countryNameCallback = { country in
                 self.country = country
                 self.txtCountry.text = country
-                
                 self.countryErrorStackView.isHidden  = true
                 self.countryOuterView.showRedBorder(false)
             }
-            
             self.present(countryListVC, animated: true, completion: nil)
-            
             return false
-        }else{
+        } else {
             return true
         }
     }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //This is mainly for shifting the responder
-        if textField == txtUsername{
+        // This is mainly for shifting the responder
+        if textField == txtUsername {
             txtPassword.becomeFirstResponder()
-        }else if textField == txtPassword{
+        } else if textField == txtPassword {
             self.view.endEditing(true)
         }
         return true
     }
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
         if textField == txtUsername {
             usernameOuterView.showRedBorder(false)
             usernameErrorStackView.isHidden = true
             self.username = currentText
-        }else if textField == txtPassword {
+        } else if textField == txtPassword {
             passwordOuterView.showRedBorder(false)
             passwordErrorStackView.isHidden = true
             self.password = currentText
         }
-        
         checkAvailability()
-        
         return true
     }
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == txtUsername, textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+        if textField == txtUsername, textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             usernameOuterView.showRedBorder(true)
             usernameErrorStackView.isHidden = false
             lblUsernameError.text           = "Please enter username"
-        }else if textField == txtPassword, textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+        } else if textField == txtPassword, textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             passwordOuterView.showRedBorder(true)
             passwordErrorStackView.isHidden = false
             lblPasswordError.text           = "Please enter password"
-        }else if textField == txtPassword, textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) != ""{
-            if !textField.text!.isValidPassword{
+        } else if textField == txtPassword, textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
+            if !textField.text!.isValidPassword {
                 passwordOuterView.showRedBorder(true)
                 passwordErrorStackView.isHidden = false
                 lblPasswordError.text           = "Please enter a valid password"
             }
         }
     }
-    
-    func checkAvailability(){
-        if (self.username != "") && (self.password != "") && self.password.isValidPassword{
+    func checkAvailability() {
+        if (self.username != "") && (self.password != "") && self.password.isValidPassword {
             btnLogin.isEnabled = true
             btnLogin.backgroundColor = .appGreenColor
-        }else{
+        } else {
             btnLogin.isEnabled = false
             btnLogin.backgroundColor = .appGreenColorDisabled
         }
     }
 }
-
