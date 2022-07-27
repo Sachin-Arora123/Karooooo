@@ -48,4 +48,12 @@ extension UsersListVC: UITableViewDelegate, UITableViewDataSource {
         userCell.lblCountryName.text = self.userDataSourceArray?[indexPath.row].username
         return userCell
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let userDetail = storyboard?.instantiateViewController(withIdentifier: "UserDetailVC") as? UserDetailVC else {return}
+        userDetail.detailUser = self.userDataSourceArray?[indexPath.row]
+        navigationController?.pushViewController(userDetail, animated: true)
+    }
 }

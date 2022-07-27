@@ -33,18 +33,16 @@ final class LoginVC: UIViewController {
     private var password = ""
     private var country  = ""
     var countryNameArray: [String]?
-    var database:DBHelper = DBHelper()
+    var database: DBHelper = DBHelper()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
-    
     func setupView() {
         // setup navigation bar
         self.title = "Login"
         navigationController?.navigationBar.prefersLargeTitles = true
-        
         // initial state
         btnLogin.isEnabled              = false
         usernameErrorStackView.isHidden = true
@@ -52,12 +50,10 @@ final class LoginVC: UIViewController {
         countryErrorStackView.isHidden  = true
         self.countryNameArray = NSLocale.getCountryNames()
     }
-   
     @IBAction func showHidePassword(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         txtPassword.isSecureTextEntry.toggle()
     }
-    
     @IBAction func loginBtnTapped(_ sender: UIButton) {
         // Check if user has selected any country.
         self.view.endEditing(true)
@@ -65,15 +61,14 @@ final class LoginVC: UIViewController {
             countryErrorStackView.isHidden  = false
             lblCountryError.text = "Please select your country"
             countryOuterView.showRedBorder(true)
-        }else{
-            //Proceed with saving the data in database.
+        } else {
+            // Proceed with saving the data in database.
             saveData()
         }
     }
-    // Save data in database
+    // Save data in database
     func saveData() {
         database.insert(id: 0, username: self.username, password: self.password, country: self.country)
-        
         // Redirect to new screen.
         guard let userlistVC = storyboard?.instantiateViewController(withIdentifier: "UsersListVC") as? UsersListVC else{return}
         navigationController?.pushViewController(userlistVC, animated: true)
