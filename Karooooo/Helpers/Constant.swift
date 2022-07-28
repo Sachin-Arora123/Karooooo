@@ -12,7 +12,6 @@ class Constant: NSObject {
     
     static let shared        = Constant()
     let appName              = "Karooooo"
-//    let appDelegate          = UIApplication.shared.delegate as! AppDelegate
     let scene                = UIApplication.shared.connectedScenes.first
     let api                  = API()
 //    let message              = AppMessage()

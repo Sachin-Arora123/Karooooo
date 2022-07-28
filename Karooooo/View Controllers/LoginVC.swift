@@ -78,7 +78,7 @@ final class LoginVC: UIViewController {
 extension LoginVC: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == txtCountry {
-            guard let countryListVC = storyboard?.instantiateViewController(withIdentifier: "CountryListVC") as? CountryListVC else{return false}
+            guard let countryListVC = storyboard?.instantiateViewController(withIdentifier: "CountryListVC") as? CountryListVC else {return false}
             countryListVC.countryList            = self.countryNameArray ?? []
             countryListVC.countryNameCallback = { country in
                 self.country = country

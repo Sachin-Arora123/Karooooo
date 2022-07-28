@@ -15,26 +15,25 @@ class DBHelper {
     }
 
     let dbPath: String = "Karooooo.sqlite"
-    var database : OpaquePointer?
+    var database: OpaquePointer?
 
-    func openDatabase() -> OpaquePointer?{
+    func openDatabase() -> OpaquePointer? {
         let fileURL = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             .appendingPathComponent(dbPath)
-        var db: OpaquePointer? = nil
-        if sqlite3_open(fileURL?.path, &db) != SQLITE_OK{
+        var database: OpaquePointer?
+        if sqlite3_open(fileURL?.path, &database) != SQLITE_OK {
             print("error opening database")
             return nil
-        }else{
+        } else {
             print("Successfully opened connection to database at \(dbPath)")
-            return db
+            return database
         }
     }
-    
     func createTable() {
         let createTableString = "CREATE TABLE IF NOT EXISTS person(Id INTEGER PRIMARY KEY,username TEXT,password TEXT,country TEXT);"
-        var createTableStatement: OpaquePointer? = nil
-        if sqlite3_prepare_v2(database, createTableString, -1, &createTableStatement, nil) == SQLITE_OK{
-            if sqlite3_step(createTableStatement) == SQLITE_DONE{
+        var createTableStatement: OpaquePointer?
+        if sqlite3_prepare_v2(database, createTableString, -1, &createTableStatement, nil) == SQLITE_OK {
+            if sqlite3_step(createTableStatement) == SQLITE_DONE {
                 print("person table created.")
             } else {
                 print("person table could not be created.")
@@ -44,22 +43,15 @@ class DBHelper {
         }
         sqlite3_finalize(createTableStatement)
     }
-    
-    
-    func insert(id:Int, username:String, password:String, country:String){
+    func insert(id: Int, username: String, password: String, country: String) {
         let persons = read()
-        for person in persons{
-            if person.id == id{
-                return
-            }
-        }
+        for person in persons where person.id == id { return }
         let insertStatementString = "INSERT INTO person (Id, username, password, country) VALUES (NULL, ?, ?, ?);"
-        var insertStatement: OpaquePointer? = nil
+        var insertStatement: OpaquePointer?
         if sqlite3_prepare_v2(database, insertStatementString, -1, &insertStatement, nil) == SQLITE_OK {
             sqlite3_bind_text(insertStatement, 1, (username as NSString).utf8String, -1, nil)
             sqlite3_bind_text(insertStatement, 2, (password as NSString).utf8String, -1, nil)
             sqlite3_bind_text(insertStatement, 3, (country as NSString).utf8String, -1, nil)
-            
             if sqlite3_step(insertStatement) == SQLITE_DONE {
                 print("Successfully inserted row.")
             } else {
@@ -70,11 +62,10 @@ class DBHelper {
         }
         sqlite3_finalize(insertStatement)
     }
-    
     func read() -> [Person] {
         let queryStatementString = "SELECT * FROM person;"
-        var queryStatement: OpaquePointer? = nil
-        var psns : [Person] = []
+        var queryStatement: OpaquePointer?
+        var psns: [Person] = []
         if sqlite3_prepare_v2(database, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
             while sqlite3_step(queryStatement) == SQLITE_ROW {
                 let id       = sqlite3_column_int(queryStatement, 0)

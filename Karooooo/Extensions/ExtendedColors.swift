@@ -9,14 +9,10 @@ import Foundation
 import UIKit
 
 extension UIColor {
-
     class var appGreenColorDisabled: UIColor {
         return UIColor(named: "appGreenColorDisabled")!
     }
-    
     class var appGreenColor: UIColor {
         return UIColor(named: "appGreenColor")!
     }
-    
-    
 }

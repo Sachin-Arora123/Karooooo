@@ -17,25 +17,29 @@ class UsersListVC: UIViewController {
         getUsers()
     }
     func getUsers() {
-        let apiurlString = Constant.shared.api.baseURL + Constant.shared.api.getUsers
-        guard let apiUrl = URL(string: apiurlString) else {return}
-        var request = URLRequest(url: apiUrl, timeoutInterval: Double.infinity)
-        request.httpMethod = Constant.shared.api.getApi
+        if EventManager.checkForInternetConnection() {
+            let apiurlString = Constant.shared.api.baseURL + Constant.shared.api.getUsers
+            guard let apiUrl = URL(string: apiurlString) else {return}
+            var request = URLRequest(url: apiUrl, timeoutInterval: Double.infinity)
+            request.httpMethod = Constant.shared.api.getApi
 
-        let task = URLSession.shared.dataTask(with: request) { data, _, error in
-            guard let data = data else {return}
-            do {
-                let jsonDecoder = JSONDecoder()
-                let responseModel = try jsonDecoder.decode(ApiUser.self, from: data)
-                self.userDataSourceArray = responseModel
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data else {return}
+                do {
+                    let jsonDecoder = JSONDecoder()
+                    let responseModel = try jsonDecoder.decode(ApiUser.self, from: data)
+                    self.userDataSourceArray = responseModel
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                } catch {
+                    print(error.localizedDescription)
                 }
-            } catch {
-                print(error.localizedDescription)
             }
+            task.resume()
+        } else {
+            self.showAlert(alertTitle: Constant.shared.appName, alertMessage: "No Internet", buttonTitles: ["Ok"], style: .alert, action: nil)
         }
-        task.resume()
     }
 }
 

@@ -8,7 +8,7 @@
 import Foundation
 
 extension NSLocale {
-    //get an array of country names from NSlocale
+    // get an array of country names from NSlocale
     class func getCountryNames() -> [String] {
         var countryNames = [String]()
         for localeCode in NSLocale.isoCountryCodes {

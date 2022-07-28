@@ -10,10 +10,8 @@ import UIKit
 class CountryListVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
     var countryList = [String]()
-    var countryNameCallback : ((_ name : String) -> Void)?
-    
+    var countryNameCallback: ((_ name: String) -> Void)?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,6 +34,6 @@ extension CountryListVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-class CountryTableViewCell : UITableViewCell {
+class CountryTableViewCell: UITableViewCell {
     @IBOutlet weak var lblCountryName: UILabel!
 }

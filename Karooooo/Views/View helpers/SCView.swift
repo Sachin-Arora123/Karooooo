@@ -8,10 +8,7 @@
 import UIKit
 
 @IBDesignable
-public class SCView: UIView
-{
-   
-    
+public class SCView: UIView {
     @IBInspectable
     var cornerRadius: CGFloat {
         get {
@@ -21,17 +18,14 @@ public class SCView: UIView
             layer.cornerRadius = newValue
         }
     }
-    
     @IBInspectable var borderColor: UIColor? {
         didSet {
             layer.borderColor = borderColor?.cgColor
         }
     }
-    
-    @IBInspectable public var borderWidth: CGFloat =  0 {
+    @IBInspectable public var borderWidth: CGFloat = 0 {
         didSet {
             layer.borderWidth = borderWidth
-
         }
     }
     

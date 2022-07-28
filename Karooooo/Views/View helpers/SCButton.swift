@@ -8,9 +8,7 @@
 import UIKit
 
 @IBDesignable
-public class SCButton: UIButton
-{
-    
+public class SCButton: UIButton {
     @IBInspectable
     var cornerRadius: CGFloat {
         get {
@@ -20,18 +18,14 @@ public class SCButton: UIButton
             layer.cornerRadius = newValue
         }
     }
-        
     @IBInspectable var borderColor: UIColor? {
-     didSet {
-        layer.borderColor = borderColor?.cgColor
+         didSet {
+            layer.borderColor = borderColor?.cgColor
+         }
     }
+    @IBInspectable public var borderWidth: CGFloat = 0 {
+        didSet {
+            layer.borderWidth = borderWidth
+        }
     }
-        
-    @IBInspectable public var borderWidth: CGFloat =  0 {
-    didSet {
-        layer.borderWidth = borderWidth
-        
-    }
-    }
-    
 }

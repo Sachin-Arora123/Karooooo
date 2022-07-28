@@ -20,14 +20,13 @@ class UserDetailVC: UIViewController {
     @IBOutlet weak var lblPhone: UILabel!
     @IBOutlet weak var lblWebsite: UILabel!
     @IBOutlet weak var lblCompanyName: UILabel!
-    
     var detailUser: User?
     override func viewDidLoad() {
         super.viewDidLoad()
         showData()
         dropPinOnLocation()
     }
-    func showData(){
+    func showData() {
         lblName.text = detailUser?.name
         lblUsername.text = detailUser?.username
         lblEmail.text = detailUser?.email
@@ -40,7 +39,7 @@ class UserDetailVC: UIViewController {
         lblCompanyName.text = detailUser?.company?.name
     }
     func dropPinOnLocation() {
-        if let latitude = detailUser?.address?.geo?.lat, let longitude = detailUser?.address?.geo?.lng{
+        if let latitude = detailUser?.address?.geo?.lat, let longitude = detailUser?.address?.geo?.lng {
             if let latitudeValue = Double(latitude), let longitudeValue = Double(longitude) {
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = CLLocationCoordinate2DMake(latitudeValue, longitudeValue)

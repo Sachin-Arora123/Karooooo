@@ -8,11 +8,11 @@
 import UIKit
 
 extension UIView {
-    func showRedBorder(_ status:Bool){
-        if status{
+    func showRedBorder(_ status: Bool) {
+        if status {
             self.layer.borderColor = UIColor.red.cgColor
             self.layer.borderWidth = 1.0
-        }else{
+        } else {
             self.layer.borderWidth = 0.0
         }
     }
